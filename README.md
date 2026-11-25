@@ -1,2 +1,0 @@
-# patinhosquaqua
-aula sobre patos

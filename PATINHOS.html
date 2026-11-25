@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biologia dos Patos (Família Anatidae) - Aula Interativa</title>
+    <!-- Carregando Tailwind CSS para estilização responsiva e moderna -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carregando Google Fonts: Inter e Merriweather para títulos científicos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Carregando Lucide Icons para ícones educacionais limpos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        nature: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        water: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-water-500 selection:text-white">
+
+    <!-- Barra de Navegação Fixa -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2.5">
+                    <div class="bg-gradient-to-br from-nature-700 to-water-600 text-white p-2 rounded-xl shadow-sm">
+                        <i data-lucide="feather" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-900 tracking-tight text-lg block leading-none">BioAves</span>
+                        <span class="text-xs text-slate-500 font-medium">Ornitologia & Evolução</span>
+                    </div>
+                </div>
+                
+                <!-- Links de Navegação Desktop -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                    <a href="#introducao" class="hover:text-water-600 transition-colors py-1">1. Taxonomia</a>
+                    <a href="#anatomia" class="hover:text-water-600 transition-colors py-1">2. Anatomia Interativa</a>
+                    <a href="#ecologia" class="hover:text-water-600 transition-colors py-1">3. Ecologia & Comportamento</a>
+                    <a href="#quiz" class="bg-nature-700 text-white px-4 py-1.5 rounded-full hover:bg-nature-800 transition-all shadow-sm">4. Quiz Avaliativo</a>
+                </nav>
+
+                <!-- Botão Menu Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#introducao" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-water-50">1. Introdução & Taxonomia</a>
+            <a href="#anatomia" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-water-50">2. Anatomia & Adaptações</a>
+            <a href="#ecologia" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-water-50">3. Ecologia & Comportamento</a>
+            <a href="#quiz" class="block px-3 py-2 rounded-lg text-base font-medium bg-nature-50 text-nature-800 font-semibold">4. Fazer Quiz Avaliativo</a>
+        </div>
+    </header>
+
+    <!-- Hero Section / Capa da Aula -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-water-900 via-water-800 to-nature-900 text-white py-16 sm:py-24">
+        <!-- Padrão decorativo de fundo -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 50 Q 25 30, 50 50 T 100 50 L 100 100 L 0 100 Z" fill="currentColor"></path>
+            </svg>
+        </div>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-water-100 text-xs font-semibold uppercase tracking-wider">
+                        <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                        Módulo de Zoologia dos Vertebrados
+                    </div>
+                    <h1 class="font-serif text-3xl sm:text-5xl font-bold leading-tight text-white">
+                        A Biologia dos Patos: Mestres da Água, Terra e Ar
+                    </h1>
+                    <p class="text-water-100 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        Explore a fascinante engenharia evolutiva da família <strong>Anatidae</strong>. Descubra como a física dos fluidos, a termorregulação e adaptações anatômicas únicas permitem que essas aves prosperem nos ambientes aquáticos mais desafiadores do planeta.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#introducao" class="inline-flex items-center gap-2 bg-nature-500 hover:bg-nature-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg shadow-nature-900/30 transition-all">
+                            Iniciar Aula
+                            <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#anatomia" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl backdrop-blur-sm border border-white/20 transition-all">
+                            Explorar Anatomia 2D
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card Resumo da Aula -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-2xl">
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-water-200 mb-4 flex items-center gap-2">
+                            <i data-lucide="target" class="w-4 h-4"></i> Objetivos de Aprendizagem
+                        </h3>
+                        <ul class="space-y-3.5 text-sm text-white/90">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-nature-500/30 text-nature-300 rounded-full p-1 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></span>
+                                <span>Compreender a classificação taxonômica completa da família <em>Anatidae</em>.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-nature-500/30 text-nature-300 rounded-full p-1 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></span>
+                                <span>Analisar adaptações morfológicas: impermeabilização, lamelas filtradoras e troca térmica contracorrente.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-nature-500/30 text-nature-300 rounded-full p-1 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></span>
+                                <span>Relacionar comportamento ecológico, dimorfismo sexual e estratégias migratórias.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- SEÇÃO 1: INTRODUÇÃO E TAXONOMIA -->
+        <section id="introducao" class="scroll-mt-24 space-y-8">
+            <div class="border-l-4 border-nature-600 pl-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-nature-700">Módulo 01</span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Introdução e Classificação Taxonômica</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 space-y-4 text-slate-600 leading-relaxed">
+                    <p>
+                        O termo popular <strong>"pato"</strong> refere-se a diversas espécies de aves aquáticas pertencentes à família <strong>Anatidae</strong> (que também inclui cisnes e gansos, embora os patos sejam geralmente menores, com pescoços mais curtos e dimorfismo sexual mais acentuado).
+                    </p>
+                    <p>
+                        Com distribuição cosmopolita (encontrados em todos os continentes, exceto na Antártida), os anatídeos exibem uma notável radiação adaptativa, ocupando desde lagos de água doce e pântanos até estuários e ambientes marinhos costeiros.
+                    </p>
+                    
+                    <!-- Destaque Didático: Diferença entre Patos de Superfície e Mergulhadores -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+                        <div class="bg-water-50 border border-water-200 rounded-xl p-4">
+                            <div class="flex items-center gap-2 font-bold text-water-900 mb-1.5">
+                                <i data-lucide="waves" class="w-4 h-4 text-water-600"></i>
+                                Patos de Superfície (Anatinae)
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Alimentam-se na superfície ou submergindo apenas a cabeça e o pescoço (<em>dabbling</em>). Decolam diretamente da água sem precisar correr. Ex: Pato-real (<em>Anas platyrhynchos</em>).
+                            </p>
+                        </div>
+                        <div class="bg-nature-50 border border-nature-200 rounded-xl p-4">
+                            <div class="flex items-center gap-2 font-bold text-nature-900 mb-1.5">
+                                <i data-lucide="arrow-down-circle" class="w-4 h-4 text-nature-600"></i>
+                                Patos Mergulhadores (Aythyinae)
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Possuem patas posicionadas mais atrás no corpo para propulsão subaquática. Precisam "correr" sobre a água para ganhar impulso e decolar. Ex: Zarro-negrinha.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Árvore Taxonômica Interativa -->
+                <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="git-branch" class="w-5 h-5 text-nature-600"></i>
+                            Hierarquia Taxonômica
+                        </h3>
+                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">Clique nos níveis</span>
+                    </div>
+
+                    <div class="space-y-2" id="taxonomy-list">
+                        <!-- Níveis preenchidos via HTML com interatividade -->
+                        <div class="tax-item cursor-pointer rounded-xl border border-slate-200 p-3 hover:border-water-500 hover:bg-water-50/50 transition-all" onclick="toggleTaxDetail(this)">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs font-semibold uppercase text-slate-400">Reino</span>
+                                    <p class="font-bold text-slate-800">Animalia</p>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="tax-desc hidden text-xs text-slate-600 mt-2 pt-2 border-t border-slate-100">
+                                Organismos eucariontes, multicelulares, heterotróficos e desprovidos de parede celular.
+                            </p>
+                        </div>
+
+                        <div class="tax-item cursor-pointer rounded-xl border border-slate-200 p-3 hover:border-water-500 hover:bg-water-50/50 transition-all" onclick="toggleTaxDetail(this)">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs font-semibold uppercase text-slate-400">Filo</span>
+                                    <p class="font-bold text-slate-800">Chordata</p>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="tax-desc hidden text-xs text-slate-600 mt-2 pt-2 border-t border-slate-100">
+                                Presença de notocorda, tubo neural dorsal, fendas faringianas e cauda pós-anal em alguma fase embrionária.
+                            </p>
+                        </div>
+
+                        <div class="tax-item cursor-pointer rounded-xl border border-slate-200 p-3 hover:border-water-500 hover:bg-water-50/50 transition-all" onclick="toggleTaxDetail(this)">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs font-semibold uppercase text-slate-400">Classe</span>
+                                    <p class="font-bold text-slate-800">Aves</p>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="tax-desc hidden text-xs text-slate-600 mt-2 pt-2 border-t border-slate-100">
+                                Vertebrados endotérmicos com corpo coberto por penas, ossos pneumáticos, bico córneo sem dentes e membros anteriores modificados em asas.
+                            </p>
+                        </div>
+
+                        <div class="tax-item cursor-pointer rounded-xl border border-slate-200 p-3 hover:border-water-500 hover:bg-water-50/50 transition-all" onclick="toggleTaxDetail(this)">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs font-semibold uppercase text-slate-400">Ordem</span>
+                                    <p class="font-bold text-slate-800">Anseriformes</p>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="tax-desc hidden text-xs text-slate-600 mt-2 pt-2 border-t border-slate-100">
+                                Aves aquáticas altamente adaptadas à natação, caracterizadas por bicos largos com lamelas filtradoras e língua carnosa.
+                            </p>
+                        </div>
+
+                        <div class="tax-item cursor-pointer rounded-xl border-2 border-nature-500 bg-nature-50/60 p-3 transition-all" onclick="toggleTaxDetail(this)">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs font-bold uppercase text-nature-700">Família Principal</span>
+                                    <p class="font-bold text-nature-900">Anatidae</p>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-nature-600 transition-transform rotate-180"></i>
+                            </div>
+                            <p class="tax-desc text-xs text-slate-700 mt-2 pt-2 border-t border-nature-200">
+                                Inclui cerca de 174 espécies em mais de 40 gêneros (patos, marrecos, gansos e cisnes). Caracterizam-se por membranas interdigitais e plumagem densa impermeável.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: ANATOMIA E ADAPTAÇÕES EVOLUTIVAS INTERATIVAS -->
+        <section id="anatomia" class="scroll-mt-24 space-y-8">
+            <div class="border-l-4 border-water-600 pl-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-water-700">Módulo 02</span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Anatomia e Adaptações Evolutivas</h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-1">Clique nos pontos anatômicos do diagrama abaixo ou selecione uma estrutura para explorar sua fisiologia.</p>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    
+                    <!-- Área Visual Interativa (SVG Ilustrativo Didático) -->
+                    <div class="lg:col-span-7 bg-gradient-to-b from-water-50 to-nature-50/50 p-6 sm:p-8 flex flex-col justify-between items-center relative border-b lg:border-b-0 lg:border-r border-slate-200">
+                        <div class="w-full flex justify-between items-center mb-2">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-water-800 bg-water-100 px-3 py-1 rounded-full">Diagrama Morfológico Interativo</span>
+                            <span class="text-xs text-slate-500">Toque nos marcadores</span>
+                        </div>
+
+                        <!-- SVG Vetorial de um Pato com Hotspots -->
+                        <div class="w-full max-w-md my-4 relative">
+                            <svg viewBox="0 0 500 360" class="w-full h-auto drop-shadow-md select-none">
+                                <!-- Água estilizada -->
+                                <path d="M 20 275 Q 130 265, 250 275 T 480 275 L 480 340 L 20 340 Z" fill="#bae6fd" opacity="0.6"/>
+                                <path d="M 40 290 Q 150 282, 260 290 T 460 290" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                                <path d="M 80 310 Q 190 302, 300 310 T 430 310" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+
+                                <!-- Pata Traseira Submersa (Propulsão) -->
+                                <path d="M 235 235 L 215 295 L 185 315 L 220 312 L 245 318 L 235 295 L 250 240 Z" fill="#f97316" stroke="#c2410c" stroke-width="2" stroke-linejoin="round"/>
+                                <!-- Pata Dianteira Submersa -->
+                                <path d="M 275 235 L 265 290 L 240 308 L 270 306 L 292 312 L 280 290 L 290 238 Z" fill="#fb923c" stroke="#c2410c" stroke-width="2" stroke-linejoin="round"/>
+
+                                <!-- Corpo Principal (Plumagem) -->
+                                <path d="M 110 190 C 130 155, 210 145, 285 155 C 335 160, 365 130, 365 95 C 365 65, 395 55, 415 75 C 425 85, 420 105, 405 120 C 390 135, 395 175, 375 210 C 350 248, 250 258, 175 242 C 130 232, 95 210, 75 188 C 90 185, 100 188, 110 190 Z" fill="#d6d3d1" stroke="#57534e" stroke-width="2.5" stroke-linejoin="round"/>
+
+                                <!-- Cabeça Verde Iridescente (Macho Pato-Real) -->
+                                <path d="M 358 112 C 360 80, 370 58, 398 60 C 418 62, 426 82, 416 102 C 408 116, 392 120, 386 125 C 375 122, 365 118, 358 112 Z" fill="#15803d" stroke="#14532d" stroke-width="2"/>
+                                
+                                <!-- Colar Branco -->
+                                <path d="M 358 112 Q 373 122, 388 124 L 386 130 Q 371 128, 356 118 Z" fill="#ffffff"/>
+
+                                <!-- Peito Castanho -->
+                                <path d="M 356 118 Q 372 128, 386 130 C 394 155, 388 190, 365 212 C 345 195, 342 150, 356 118 Z" fill="#7c2d12" opacity="0.85"/>
+
+                                <!-- Asa e Espelho Alar (Azul metálico) -->
+                                <path d="M 165 185 C 215 165, 290 168, 325 192 C 300 222, 210 225, 150 205 Z" fill="#a8a29e" stroke="#57534e" stroke-width="2"/>
+                                <path d="M 195 192 L 245 190 L 238 206 L 188 206 Z" fill="#0284c7" stroke="#ffffff" stroke-width="1.5"/>
+
+                                <!-- Bico Amarelo com Lamelas -->
+                                <path d="M 418 84 C 442 84, 468 88, 472 96 C 474 103, 452 106, 415 102 Z" fill="#eab308" stroke="#a16207" stroke-width="2"/>
+                                <!-- Detalhe da narina e lamelas -->
+                                <circle cx="432" cy="90" r="2" fill="#713f12"/>
+                                <path d="M 424 99 L 462 99" stroke="#a16207" stroke-width="1" stroke-dasharray="2,2"/>
+
+                                <!-- Olho -->
+                                <circle cx="398" cy="78" r="4.5" fill="#1c1917"/>
+                                <circle cx="399.5" cy="76.5" r="1.5" fill="#ffffff"/>
+
+                                <!-- Indicação esquemática interna: Sacos Aéreos / Pulmões -->
+                                <ellipse cx="285" cy="185" rx="28" ry="14" fill="#38bdf8" opacity="0.35" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+                                <!-- Glândula Uropigiana (Base da cauda) -->
+                                <circle cx="118" cy="182" r="7" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
+
+                                <!-- HOTSPOTS INTERATIVOS (Botões Clicáveis no SVG) -->
+                                <!-- 1. Bico -->
+                                <g class="hotspot cursor-pointer" onclick="selectAnatomy('bico')" id="hs-bico">
+                                    <circle cx="452" cy="94" r="14" fill="#0284c7" fill-opacity="0.25" class="animate-ping"/>
+                                    <circle cx="452" cy="94" r="11" fill="#0284c7" stroke="#ffffff" stroke-width="2.5"/>
+                                    <text x="452" y="98" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">1</text>
+                                </g>
+
+                                <!-- 2. Glândula Uropigiana -->
+                                <g class="hotspot cursor-pointer" onclick="selectAnatomy('glandula')" id="hs-glandula">
+                                    <circle cx="118" cy="182" r="11" fill="#15803d" stroke="#ffffff" stroke-width="2.5"/>
+                                    <text x="118" y="186" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">2</text>
+                                </g>
+
+                                <!-- 3. Patas Palmadas & Termorregulação -->
+                                <g class="hotspot cursor-pointer" onclick="selectAnatomy('patas')" id="hs-patas">
+                                    <circle cx="222" cy="302" r="11" fill="#ea580c" stroke="#ffffff" stroke-width="2.5"/>
+                                    <text x="222" y="306" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">3</text>
+                                </g>
+
+                                <!-- 4. Sistema Respiratório e Flutuabilidade -->
+                                <g class="hotspot cursor-pointer" onclick="selectAnatomy('respiracao')" id="hs-respiracao">
+                                    <circle cx="285" cy="185" r="11" fill="#0369a1" stroke="#ffffff" stroke-width="2.5"/>
+                                    <text x="285" y="189" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">4</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Botões de seleção rápida abaixo do diagrama -->
+                        <div class="flex flex-wrap justify-center gap-2 w-full">
+                            <button onclick="selectAnatomy('bico')" id="btn-bico" class="anat-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-water-600 text-white shadow-sm transition-all">
+                                1. Bico & Lamelas
+                            </button>
+                            <button onclick="selectAnatomy('glandula')" id="btn-glandula" class="anat-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition-all">
+                                2. Glândula Uropigiana
+                            </button>
+                            <button onclick="selectAnatomy('patas')" id="btn-patas" class="anat-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition-all">
+                                3. Patas & Termorregulação
+                            </button>
+                            <button onclick="selectAnatomy('respiracao')" id="btn-respiracao" class="anat-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition-all">
+                                4. Sistema Respiratório
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Painel de Explicação Detalhada da Adaptação Selecionada -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-center bg-white" id="anatomy-detail-panel">
+                        <!-- Conteúdo inicial dinâmico (Bico) -->
+                        <div class="space-y-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-water-100 text-water-800 text-xs font-bold">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                                Adaptação Alimentar
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900" id="anat-title">1. Bico Adaptado e Lamelas Filtradoras</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" id="anat-desc">
+                                O bico achatado dos patos é altamente vascularizado e repleto de mecanorreceptores táteis (corpúsculos de Herbst), permitindo localizar alimentos na lama turva sem depender da visão.
+                            </p>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                                    <i data-lucide="microscope" class="w-4 h-4 text-water-600"></i>
+                                    Mecanismo Fisiológico
+                                </h4>
+                                <p class="text-xs text-slate-600 leading-relaxed" id="anat-mech">
+                                    Nas bordas internas do bico existem estruturas semelhantes a pentes chamadas <strong>lamelas</strong>. Quando o pato suga água e sedimentos, sua língua carnosa atua como um pistão, expulsando a água pelas laterais enquanto as lamelas retêm sementes, insetos e pequenos crustáceos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: ECOLOGIA, ALIMENTAÇÃO E COMPORTAMENTO -->
+        <section id="ecologia" class="scroll-mt-24 space-y-8">
+            <div class="border-l-4 border-nature-600 pl-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-nature-700">Módulo 03</span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Ecologia, Comportamento e Ciclo de Vida</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Dimorfismo Sexual e Muda -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-nature-100 text-nature-700 flex items-center justify-center mb-4">
+                            <i data-lucide="palette" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Dimorfismo Sexual & Plumagem</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            Na maioria das espécies do hemisfério norte, os machos exibem cores vibrantes na época reprodutiva para atrair fêmeas (seleção sexual), enquanto as fêmeas possuem plumagem críptica (marrom rajada) para camuflagem no ninho.
+                        </p>
+                    </div>
+                    <div class="bg-nature-50 rounded-xl p-3 text-xs text-nature-900 border border-nature-100">
+                        <strong>Plumagem de Eclipse:</strong> Após o acasalamento, os machos trocam as penas coloridas por uma plumagem discreta semelhante à da fêmea enquanto ficam temporariamente incapazes de voar.
+                    </div>
+                </div>
+
+                <!-- Card 2: Migração e Navegação -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-water-100 text-water-700 flex items-center justify-center mb-4">
+                            <i data-lucide="compass" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Migração & Voo em Formação</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            Muitas espécies migram milhares de quilômetros entre áreas de reprodução no verão e zonas de invernada mais quentes, orientando-se pelo campo magnético da Terra, estrelas e marcos geográficos.
+                        </p>
+                    </div>
+                    <div class="bg-water-50 rounded-xl p-3 text-xs text-water-900 border border-water-100">
+                        <strong>Aerodinâmica em "V":</strong> Voar em formação reduz o arrasto aerodinâmico ao aproveitar os vórtices de ponta de asa da ave à frente, economizando até 20% de energia.
+                    </div>
+                </div>
+
+                <!-- Card 3: Cuidado Parental e Imprinting -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Filhotes Precociais & Imprinting</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            Os patinhos são <strong>precociais</strong>: nascem cobertos de penugem, com olhos abertos e capazes de nadar e buscar alimento poucas horas após a eclosão, sob a vigilância constante da mãe.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-900 border border-amber-100">
+                        <strong>Estampagem (Imprinting):</strong> Fenômeno etológico estudado por Konrad Lorenz, onde o filhote fixa visualmente o primeiro objeto móvel após nascer (normalmente a mãe) e passa a segui-lo.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: QUIZ INTERATIVO DE FIXAÇÃO -->
+        <section id="quiz" class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-slate-900 via-water-900 to-nature-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/15">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-nature-400">Avaliação de Aprendizagem</span>
+                            <h2 class="font-serif text-2xl sm:text-3xl font-bold mt-1">Quiz Rápido de Biologia</h2>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/15 text-sm font-semibold">
+                            Pontuação: <span id="quiz-score" class="text-nature-400">0</span> / <span id="quiz-total">4</span>
+                        </div>
+                    </div>
+
+                    <!-- Container das Perguntas -->
+                    <div id="quiz-container" class="py-6 space-y-6">
+                        <!-- Renderizado dinamicamente via JavaScript -->
+                    </div>
+
+                    <!-- Resultado Final do Quiz (oculto até responder todas) -->
+                    <div id="quiz-result" class="hidden bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center space-y-4">
+                        <div class="w-16 h-16 bg-nature-500/20 text-nature-300 rounded-full flex items-center justify-center mx-auto">
+                            <i data-lucide="award" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold" id="result-title">Parabéns!</h3>
+                        <p class="text-water-100 text-sm max-w-md mx-auto" id="result-message"></p>
+                        <button onclick="resetQuiz()" class="inline-flex items-center gap-2 bg-nature-500 hover:bg-nature-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                            Refazer Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé Educacional -->
+    <footer class="bg-white border-t border-slate-200 mt-20 py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+            <div class="flex items-center gap-2">
+                <i data-lucide="feather" class="w-4 h-4 text-nature-700"></i>
+                <span class="font-semibold text-slate-700">BioAves</span> — Material Didático Interativo de Zoologia
+            </div>
+            <p>Conteúdo baseado em Ornitologia Comparada e Ecologia de Aves Aquáticas.</p>
+        </div>
+    </footer>
+
+    <!-- Lógica Interativa da Aula -->
+    <script>
+        // Inicializar ícones Lucide
+        lucide.createIcons();
+
+        // Menu Mobile Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fechar menu mobile ao clicar em link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // 1. Interatividade da Árvore Taxonômica
+        function toggleTaxDetail(element) {
+            const desc = element.querySelector('.tax-desc');
+            const icon = element.querySelector('i');
+            desc.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // 2. Dados e Interatividade da Anatomia dos Patos
+        const anatomyData = {
+            bico: {
+                badge: "Adaptação Alimentar",
+                badgeColor: "bg-water-100 text-water-800",
+                icon: "sparkles",
+                title: "1. Bico Adaptado e Lamelas Filtradoras",
+                desc: "O bico achatado dos patos é altamente vascularizado e repleto de mecanorreceptores táteis (corpúsculos de Herbst), permitindo localizar alimentos na lama turva sem depender da visão.",
+                mech: "Nas bordas internas do bico existem estruturas semelhantes a pentes chamadas <strong>lamelas</strong>. Quando o pato suga água e sedimentos, sua língua carnosa atua como um pistão, expulsando a água pelas laterais enquanto as lamelas retêm sementes, insetos e pequenos crustáceos."
+            },
+            glandula: {
+                badge: "Impermeabilização & Flutuabilidade",
+                badgeColor: "bg-nature-100 text-nature-800",
+                icon: "droplets",
+                title: "2. Glândula Uropigiana e Estrutura das Penas",
+                desc: "Localizada na base dorsal da cauda, a glândula uropigiana secreta um óleo rico em ceras e ácidos graxos que o pato espalha por toda a plumagem com o bico (comportamento de preening).",
+                mech: "O óleo uropigiano, combinado com o encaixe microscópico perfeito das bárbulas das penas, impede que a água penetre até a pele. Isso aprisiona uma camada de ar isolante junto ao corpo, garantindo <strong>isolamento térmico</strong> e <strong>flutuabilidade positiva</strong>."
+            },
+            patas: {
+                badge: "Locomoção & Termorregulação",
+                badgeColor: "bg-orange-100 text-orange-800",
+                icon: "thermometer-snowflake",
+                title: "3. Patas Palmadas e Troca Contracorrente",
+                desc: "As membranas interdigitais (patas palmadas) funcionam como remos eficientes: abrem-se durante o impulso para trás na água e fecham-se no retorno para reduzir o arrasto hidrodinâmico.",
+                mech: "Para não congelar em águas geladas, as patas possuem um sistema de <strong>troca de calor contracorrente</strong> (<em>rete mirabile</em>): artérias com sangue arterial quente transferem calor diretamente para veias adjacentes com sangue frio que retorna dos pés, minimizando a perda térmica corporal."
+            },
+            respiracao: {
+                badge: "Eficiência Metabólica",
+                badgeColor: "bg-sky-100 text-sky-800",
+                icon: "wind",
+                title: "4. Sistema Respiratório com Sacos Aéreos",
+                desc: "Como todas as aves, os patos possuem pulmões rígidos conectados a um extenso sistema de sacos aéreos (cervicais, torácicos e abdominais) e ossos pneumáticos ocos.",
+                mech: "O fluxo de ar nos pulmões é <strong>unidirecional</strong>, permitindo trocas gasosas contínuas tanto na inspiração quanto na expiração. Isso sustenta o altíssimo metabolismo exigido durante voos migratórios de longa distância em grandes altitudes."
+            }
+        };
+
+        function selectAnatomy(partKey) {
+            const data = anatomyData[partKey];
+            if (!data) return;
+
+            // Atualizar botões de aba
+            document.querySelectorAll('.anat-tab').forEach(btn => {
+                btn.className = "anat-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition-all";
+            });
+            const activeBtn = document.getElementById(`btn-${partKey}`);
+            if (activeBtn) {
+                activeBtn.className = "anat-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-water-600 text-white shadow-sm transition-all";
+            }
+
+            // Atualizar painel de detalhes com animação suave
+            const panel = document.getElementById('anatomy-detail-panel');
+            panel.innerHTML = `
+                <div class="space-y-4 transition-opacity duration-300">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full ${data.badgeColor} text-xs font-bold">
+                        <i data-lucide="${data.icon}" class="w-3.5 h-3.5"></i>
+                        ${data.badge}
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">${data.title}</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ${data.desc}
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                            <i data-lucide="microscope" class="w-4 h-4 text-water-600"></i>
+                            Mecanismo Fisiológico
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            ${data.mech}
+                        </p>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // 3. Sistema de Quiz Interativo
+        const quizQuestions = [
+            {
+                question: "1. Qual estrutura anatômica é responsável por secretar o óleo que os patos espalham nas penas para torná-las impermeáveis?",
+                options: [
+                    "Glândula uropigiana",
+                    "Sacos aéreos abdominais",
+                    "Lamelas maxilares",
+                    "Rete mirabile"
+                ],
+                correct: 0,
+                explanation: "Correto! A glândula uropigiana, situada na base da cauda, produz uma secreção oleosa que mantém a integridade e impermeabilidade da plumagem."
+            },
+            {
+                question: "2. Como os patos evitam perder calor excessivo através de suas patas desprovidas de penas quando nadam em águas congelantes?",
+                options: [
+                    "Aumentando a frequência cardíaca em 300%",
+                    "Através de um sistema vascular de troca de calor contracorrente",
+                    "Hibernando metabolicamente durante o nado",
+                    "Acumulando uma espessa camada de gordura nas membranas interdigitais"
+                ],
+                correct: 1,
+                explanation: "Exato! Na troca contracorrente, o sangue arterial quente que desce para as patas aquece o sangue venoso frio que retorna ao corpo, conservando o calor central."
+            },
+            {
+                question: "3. A qual Ordem e Família taxonômica pertencem os patos, marrecos, gansos e cisnes?",
+                options: [
+                    "Ordem Passeriformes / Família Corvidae",
+                    "Ordem Ciconiiformes / Família Ardeidae",
+                    "Ordem Anseriformes / Família Anatidae",
+                    "Ordem Pelecaniformes / Família Sulidae"
+                ],
+                correct: 2,
+                explanation: "Muito bem! Todos os patos pertencem à Ordem Anseriformes e à Família Anatidae."
+            },
+            {
+                question: "4. Qual é a principal função das 'lamelas' presentes nas bordas internas do bico dos patos?",
+                options: [
+                    "Triturar ossos de pequenos peixes",
+                    "Produzir sons de vocalização durante o cortejo",
+                    "Filtrar partículas de alimento da água e da lama",
+                    "Auxiliar na ancoragem em galhos de árvores"
+                ],
+                correct: 2,
+                explanation: "Perfeito! As lamelas atuam como um filtro fino que retém sementes, algas e invertebrados enquanto a língua expulsa o excesso de água."
+            }
+        ];
+
+        let score = 0;
+        let answeredCount = 0;
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            document.getElementById('quiz-total').textContent = quizQuestions.length;
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, qIndex) => {
+                const card = document.createElement('div');
+                card.className = "bg-white/5 border border-white/10 rounded-2xl p-5 space-y-4";
+                card.id = `q-card-${qIndex}`;
+
+                let optionsHtml = '';
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <button 
+                            onclick="handleAnswer(${qIndex}, ${optIndex})"
+                            id="q-${qIndex}-opt-${optIndex}"
+                            class="w-full text-left px-4 py-3 rounded-xl border border-white/15 bg-white/5 hover:bg-white/15 text-sm text-water-50 transition-all flex items-center justify-between gap-3">
+                            <span>${opt}</span>
+                            <span class="status-icon"></span>
+                        </button>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <p class="font-semibold text-base text-white">${q.question}</p>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        ${optionsHtml}
+                    </div>
+                    <div id="q-feedback-${qIndex}" class="hidden text-xs p-3 rounded-xl bg-white/10 text-water-100 border border-white/15 leading-relaxed"></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function handleAnswer(qIndex, selectedOptIndex) {
+            const qCard = document.getElementById(`q-card-${qIndex}`);
+            if (qCard.dataset.answered === "true") return; // Evita responder duas vezes
+            qCard.dataset.answered = "true";
+
+            const questionObj = quizQuestions[qIndex];
+            const isCorrect = selectedOptIndex === questionObj.correct;
+            answeredCount++;
+
+            if (isCorrect) {
+                score++;
+                document.getElementById('quiz-score').textContent = score;
+            }
+
+            // Estilizar botões da questão
+            questionObj.options.forEach((_, idx) => {
+                const btn = document.getElementById(`q-${qIndex}-opt-${idx}`);
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-white/15');
+
+                if (idx === questionObj.correct) {
+                    btn.className = "w-full text-left px-4 py-3 rounded-xl border-2 border-nature-400 bg-nature-500/25 text-sm text-white font-semibold flex items-center justify-between gap-3";
+                    btn.querySelector('.status-icon').innerHTML = `<i data-lucide="check-circle-2" class="w-5 h-5 text-nature-400"></i>`;
+                } else if (idx === selectedOptIndex && !isCorrect) {
+                    btn.className = "w-full text-left px-4 py-3 rounded-xl border-2 border-rose-400 bg-rose-500/25 text-sm text-white flex items-center justify-between gap-3";
+                    btn.querySelector('.status-icon').innerHTML = `<i data-lucide="x-circle" class="w-5 h-5 text-rose-400"></i>`;
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            // Mostrar feedback imediato
+            const feedbackEl = document.getElementById(`q-feedback-${qIndex}`);
+            feedbackEl.classList.remove('hidden');
+            feedbackEl.innerHTML = `<strong>${isCorrect ? '✓ Resposta Correta:' : '✗ Atenção:'}</strong> ${questionObj.explanation}`;
+            lucide.createIcons();
+
+            // Verificar se todas as questões foram respondidas
+            if (answeredCount === quizQuestions.length) {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            const resultBox = document.getElementById('quiz-result');
+            const titleEl = document.getElementById('result-title');
+            const msgEl = document.getElementById('result-message');
+
+            resultBox.classList.remove('hidden');
+            if (score === quizQuestions.length) {
+                titleEl.textContent = "Excelente! Gabaritou a Aula!";
+                msgEl.textContent = `Você acertou todas as ${score} questões sobre a biologia e fisiologia da família Anatidae.`;
+            } else if (score >= 2) {
+                titleEl.textContent = "Muito Bom Desempenho!";
+                msgEl.textContent = `Você acertou ${score} de ${quizQuestions.length} questões. Revise os módulos acima para dominar todos os conceitos.`;
+            } else {
+                titleEl.textContent = "Continue Explorando!";
+                msgEl.textContent = `Você acertou ${score} de ${quizQuestions.length} questões. Que tal revisar o diagrama interativo de anatomia e tentar novamente?`;
+            }
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetQuiz() {
+            score = 0;
+            answeredCount = 0;
+            document.getElementById('quiz-score').textContent = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+            lucide.createIcons();
+        }
+
+        // Inicializar Quiz ao carregar
+        renderQuiz();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
